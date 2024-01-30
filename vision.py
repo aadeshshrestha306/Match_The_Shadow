@@ -12,19 +12,60 @@ image = pygame.image.load("Resources/wallpaper.jpg")
 
 bg = pygame.transform.scale(image, (1280, 720))
 
-apple = pygame.image.load("Resources/Fruits/apple.jpg")
-banana = pygame.image.load("Resources/Fruits/banana.png")
-strawberry = pygame.image.load("Resources/Fruits/strawberry.png")
-watermelon = pygame.image.load("Resources/Fruits/watermelon.png")
+f1 = pygame.image.load("Resources/Fruits/apple.jpg")
+f2 = pygame.image.load("Resources/Fruits/banana.png")
 
+
+apple = pygame.transform.scale(f1, (200,256))
+banana = pygame.transform.scale(f2, (200,200))
+
+
+apple_shadow = pygame.Surface(apple.get_size(), pygame.SRCALPHA)
+banana_shadow = pygame.Surface(banana.get_size(), pygame.SRCALPHA)
+
+
+shadow_alpha = 100
+apple_shadow.fill((0, 0, 0, shadow_alpha))
+banana_shadow.fill((0, 0, 0, shadow_alpha))
+
+
+# Define fruit positions
+apple_pos = (100, 100)
+banana_pos = (300, 100)
+
+# Main game loop
+dragging = False
+dragged_fruit = None
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if apple.get_rect(topleft=apple_pos).collidepoint(event.pos):
+                dragging = True
+                dragged_fruit = apple
+            elif banana.get_rect(topleft=banana_pos).collidepoint(event.pos):
+                dragging = True
+                dragged_fruit = banana
+        elif event.type == pygame.MOUSEBUTTONUP:
+            dragging = False
+            dragged_fruit = None
 
-    screen.blit(image, (0,0))
+    screen.fill((255, 255, 255))
+
+    # Draw shadows
+    screen.blit(bg, (0,0))
+
+    screen.blit(apple, apple_pos)
+    screen.blit(banana, banana_pos)
+
+    # Drag and drop logic
+    if dragging and dragged_fruit:
+        dragged_fruit_rect = dragged_fruit.get_rect(topleft=pygame.mouse.get_pos())
+        screen.blit(dragged_fruit, dragged_fruit_rect.topleft)
+
     pygame.display.update()
 
 
