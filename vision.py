@@ -5,12 +5,17 @@ import sys
 
 pygame.init()
 
-pygame.display.set_caption("Game")
+pygame.display.set_caption("Match Fruits")
 screen = pygame.display.set_mode((1280, 720))
 
-image = pygame.image.load("bg.jpg")
+image = pygame.image.load("Resources/wallpaper.jpg")
 
 bg = pygame.transform.scale(image, (1280, 720))
+
+apple = pygame.image.load("Resources/Fruits/apple.jpg")
+banana = pygame.image.load("Resources/Fruits/banana.png")
+strawberry = pygame.image.load("Resources/Fruits/strawberry.jpg")
+watermelon = pygame.image.load("Resources/Fruits/watermelon.png")
 
 
 while True:
@@ -19,7 +24,7 @@ while True:
             pygame.quit()
             sys.exit()
 
-    screen.blit(bg, (0,0))
+    screen.blit(image, (0,0))
     pygame.display.update()
 
 
