@@ -14,7 +14,7 @@ bg = pygame.transform.scale(image, (1280, 720))
 
 apple = pygame.image.load("Resources/Fruits/apple.jpg")
 banana = pygame.image.load("Resources/Fruits/banana.png")
-strawberry = pygame.image.load("Resources/Fruits/strawberry.jpg")
+strawberry = pygame.image.load("Resources/Fruits/strawberry.png")
 watermelon = pygame.image.load("Resources/Fruits/watermelon.png")
 
 
